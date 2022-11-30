@@ -19,13 +19,29 @@
         {
             event.preventDefault()
 
-            const namevalue=event.target.username.value;
-            const mailvalue=event.target.useremail.value;
+            
+                            const namevalue=event.target.username.value;
+                            const mailvalue=event.target.useremail.value;
+            let userDetails=
+            {
+                name:namevalue,
+                mail:mailvalue
+            }
+            console.log(userDetails)
 
-            localStorage.setItem('name',namevalue)
-            localStorage.setItem('name',mailvalue)
 
+            // localStorage.setItem('name',namevalue)
+            // localStorage.setItem('name',mailvalue)
+
+            let userDetails_serialized=JSON.stringify(userDetails) // it will convert our object to strings
+            console.log(userDetails_serialized)
+
+            localStorage.setItem('name',userDetails_serialized)
+
+            let obj_deserialized=JSON.parse(localStorage.getItem('name'))
+            console.log(obj_deserialized)//itconverrst our userdetails_serialized to the object again
         }
+
     </script>
 </body>
 </html>
