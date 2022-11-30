@@ -9,12 +9,15 @@
 <body>
     
     <form onsubmit="saveToLocalStorage(event)">
-        <input type="text" name="username">
-        <input type="email" name="useremail">
+        <input id="myname" type="text" name="username">
+        <input id="mymail" type="email" name="useremail">
         <button>submit</button>
     </form>
 
-    <ul id="to_insert_values_from_ls"></ul>
+    <ul id="to_insert_values_from_ls">
+        <!-- <button>delete</button>
+        <button>edit</button> -->
+    </ul>
     <!-- creating a parentnode which can take our values as its child from the localStorage -->
 
     <script>
@@ -50,12 +53,83 @@
 
         //now we will define a function
         function showNewUsersOnScreen(user){
-            const parentnode=document.getElementById('to_insert_values_from_ls')
-            const childHtml=`<li> ${user.name}-${user.mail}</li>`
-            //by using string interpolation we can use variables inside a string just write `inside this` and put${var inside this}
 
-            parentnode.innerHTML=parentnode.innerHTML+childHtml
+            if(localStorage.getItem(user.mail)!=null)
+            {
+                removeUserFomScreen(user.mail)
+            }
+                  const btn=`<button class="dlt" onsubmit="removeli(e)">delete</button>`
+                  const edt=`<button class="edt">edit</edit>`
+                    console.log(edt)
+
+                    
+
+
+                    const parentnode=document.getElementById('to_insert_values_from_ls')
+                    
+                    const childHtml=`<li> ${user.name}-${user.mail} ${btn}  ${edt}</li>`
+                    //by using string interpolation we can use variables inside a string just write `inside this` and put${var inside this}
+                    
+                    parentnode.innerHTML=parentnode.innerHTML+childHtml
+
+                    //delete button functionality
+
+                    var deletebtn=document.querySelector('.dlt')
+                    console.log(deletebtn)
+
+                    deletebtn.addEventListener("click",removeli)
+                    function removeli(e)
+                    {
+                        e.preventDefault();
+                        const parentnode=document.getElementById('to_insert_values_from_ls')
+            // console.log(parentnode)
+                        var litoberemove=document.querySelector('li')
+
+                            parentnode.removeChild(litoberemove)
+                            localStorage.removeItem(user.mail)
+                    }
+                         
+                    //editfunctionality
+
+                    var edtbtn=document.querySelector('.edt')
+                    edtbtn.style.backgroundColor='coral'
+                    
+
+                    edtbtn.addEventListener("click",removeli)
+                    function removeli(e)
+                    {
+
+
+                        e.preventDefault();
+                        const parentnode=document.getElementById('to_insert_values_from_ls')
+            // console.log(parentnode)
+                        var litoberemove=document.querySelector('li')
+
+                            parentnode.removeChild(litoberemove)
+                            localStorage.removeItem(user.mail)
+                    }
+
+
+
+                }
+
+        function removeUserFomScreen(emailId)
+        {
+            const parentnode=document.getElementById('to_insert_values_from_ls')
+            // console.log(parentnode)
+            var childNodeToBeDeleted=document.querySelector('li')
+
+            if(childNodeToBeDeleted)
+            {
+                parentnode.removeChild(childNodeToBeDeleted)
+            }
+            
+            
+
         }
+
+
+
 
     </script>
 </body>
