@@ -14,6 +14,9 @@
         <button>submit</button>
     </form>
 
+    <ul id="to_insert_values_from_ls"></ul>
+    <!-- creating a parentnode which can take our values as its child from the localStorage -->
+
     <script>
         function saveToLocalStorage(event)
         {
@@ -36,10 +39,22 @@
             let userDetails_serialized=JSON.stringify(userDetails) // it will convert our object to strings
             console.log(userDetails_serialized)
 
-            localStorage.setItem('name',userDetails_serialized)
+            localStorage.setItem(userDetails.mail,userDetails_serialized)
 
             let obj_deserialized=JSON.parse(localStorage.getItem('name'))
             console.log(obj_deserialized)//itconverrst our userdetails_serialized to the object again
+
+            showNewUsersOnScreen(userDetails)
+            //creating a function with user details in it
+        }
+
+        //now we will define a function
+        function showNewUsersOnScreen(user){
+            const parentnode=document.getElementById('to_insert_values_from_ls')
+            const childHtml=`<li> ${user.name}-${user.mail}</li>`
+            //by using string interpolation we can use variables inside a string just write `inside this` and put${var inside this}
+
+            parentnode.innerHTML=parentnode.innerHTML+childHtml
         }
 
     </script>
