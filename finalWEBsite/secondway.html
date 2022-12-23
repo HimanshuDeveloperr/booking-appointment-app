@@ -98,25 +98,29 @@
             axios.post("https://crudcrud.com/api/e14ba95dd77d471f8f71d5d6a4cee9bd/new1", obj)
                 .then((response) => {
                     showNewUserOnScreen(response.data)
-                    console.log(response)
+
                 })
-                .catch((err) => { 
-                    
-                    document.body.innerHTML=document.body.innerHTML +` <h3 style="color:red;"> somethimg went wrong </h3>`
-                    console.log(err) })
+                .catch((err) => {
+
+                    document.body.innerHTML = document.body.innerHTML + ` <h3 style="color:red;"> somethimg went wrong </h3>`
+                    console.log(err)
+                })
 
         }
 
         window.addEventListener("DOMContentLoaded", () => {
-            const localStorageObj = localStorage;
-            const localstoragekeys = Object.keys(localStorageObj)
 
-            for (var i = 0; i < localstoragekeys.length; i++) {
-                const key = localstoragekeys[i]
-                const userDetailsString = localStorageObj[key];
-                const userDetailsObj = JSON.parse(userDetailsString);
-                showNewUserOnScreen(userDetailsObj)
-            }
+            axios.get("https://crudcrud.com/api/e14ba95dd77d471f8f71d5d6a4cee9bd/new1")
+                .then((response) => {
+                    console.log(response)
+
+                    for (var i = 0; i < response.data.length; i++) {
+                        showNewUserOnScreen(response.data[i])
+                    }
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
         })
 
         function showNewUserOnScreen(user) {
