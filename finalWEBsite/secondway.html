@@ -135,7 +135,7 @@
             const parentNode = document.getElementById('listOfUsers');
             const childHTML = `<li style="color:black; padding:8px;" id=${user._id}> ${user.name} - ${user.email}
                                         <button class="btn btn-danger" onclick=deleteUser('${user._id}')> Delete User </button>
-                                        <button class="btn btn-info" onclick=editUserDetails('${user._id}','${user.name}','${user.phonenumber}')>Edit User </button>
+                                        <button class="btn btn-info" onclick=editUserDetails('${user.email}','${user.name}','${user.phonenumber}','${user._id}')>Edit User </button>
                                      </li>`
 
             parentNode.innerHTML = parentNode.innerHTML + childHTML;
@@ -143,13 +143,13 @@
 
         //Edit User
 
-        function editUserDetails(emailId, name, phonenumber) {
+        function editUserDetails(emailId, name, phonenumber,userId) {
 
             document.getElementById('email').value = emailId;
             document.getElementById('username').value = name;
             document.getElementById('phonenumber').value = phonenumber;
 
-            deleteUser(emailId)
+            deleteUser(userId)
         }
 
         // deleteUser('abc@gmail.com')
