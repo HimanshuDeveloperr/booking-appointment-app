@@ -133,9 +133,9 @@
             }
 
             const parentNode = document.getElementById('listOfUsers');
-            const childHTML = `<li style="color:black; padding:8px;" id=${user.email}> ${user.name} - ${user.email}
-                                        <button class="btn btn-danger" onclick=deleteUser('${user.email}')> Delete User </button>
-                                        <button class="btn btn-info" onclick=editUserDetails('${user.email}','${user.name}','${user.phonenumber}')>Edit User </button>
+            const childHTML = `<li style="color:black; padding:8px;" id=${user._id}> ${user.name} - ${user.email}
+                                        <button class="btn btn-danger" onclick=deleteUser('${user._id}')> Delete User </button>
+                                        <button class="btn btn-info" onclick=editUserDetails('${user._id}','${user.name}','${user.phonenumber}')>Edit User </button>
                                      </li>`
 
             parentNode.innerHTML = parentNode.innerHTML + childHTML;
@@ -154,16 +154,21 @@
 
         // deleteUser('abc@gmail.com')
 
-        function deleteUser(emailId) {
-            console.log(emailId)
-            localStorage.removeItem(emailId);
-            removeUserFromScreen(emailId);
+        function deleteUser(userId) {
+
+            axios.delete(`https://crudcrud.com/api/e14ba95dd77d471f8f71d5d6a4cee9bd/new1/${userId}`)
+            .then((response)=>{
+                removeUserFromScreen(userId)
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
 
         }
 
-        function removeUserFromScreen(emailId) {
+        function removeUserFromScreen(userId) {
             const parentNode = document.getElementById('listOfUsers');
-            const childNodeToBeDeleted = document.getElementById(emailId);
+            const childNodeToBeDeleted = document.getElementById(userId);
             if (childNodeToBeDeleted) {
                 parentNode.removeChild(childNodeToBeDeleted)
             }
