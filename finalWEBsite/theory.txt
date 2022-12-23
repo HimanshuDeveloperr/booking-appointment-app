@@ -1,0 +1,1 @@
+cloud is nothing but a server which mainly consists of terminals without any graphical user interface in it like a lapi only without any logos or graphics it is solely made for computing purpose only the requests that the client makes to it`.
